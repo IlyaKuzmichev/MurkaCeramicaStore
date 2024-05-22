@@ -5,7 +5,6 @@ import org.example.store.model.Product;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -19,8 +18,6 @@ import static junit.framework.Assert.assertTrue;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestApplicationConfig.class)
 public class ProductRepositoryTest {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
     @Autowired
     private ProductRepository productRepository;
 
