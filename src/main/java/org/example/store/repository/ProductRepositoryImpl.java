@@ -22,7 +22,6 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     /**
      * Method for getting product by identifier
-     *
      * @param id Identifier of the entity in database
      * @return Optional of Product entity with data from database
      * @since 1.0

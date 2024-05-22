@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implementation of the Product Service for Product Repository layer
+ * @author Ilya Kuzmichev aka wilmerno
+ *
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -15,26 +20,52 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * Method for adding new product
+     * @param product Entity of the product
+     * @since 1.0
+     */
     @Override
     public void addNewProduct(Product product) {
         productRepository.save(product);
     }
 
+    /**
+     * Method for updating existing product
+     * @param product Entity of the product
+     * @since 1.0
+     */
     @Override
     public void updateProduct(Product product) {
         productRepository.update(product);
     }
 
+    /**
+     * Method for finding product by it's identifier
+     * @param id Product identifier
+     * @return Optional of Product (not present due to product doesn't exist with presented identifier)
+     * @since 1.0
+     */
     @Override
     public Optional<Product> findProductById(Long id) {
         return productRepository.findById(id);
     }
 
+    /**
+     * Method, that returns Collection of all products
+     * @return List of products
+     * @since 1.0
+     */
     @Override
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
 
+    /**
+     * Method for deleting product from the store
+     * @param id Product identifier
+     * @since 1.0
+     */
     @Override
     public void deleteProductById(Long id) {
         productRepository.delete(id);
