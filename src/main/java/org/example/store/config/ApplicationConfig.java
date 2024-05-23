@@ -24,10 +24,18 @@ import java.util.Objects;
 public class ApplicationConfig {
     private final Environment env;
 
+    /**
+     * Constructor
+     * @param env Application environment variable
+     */
     public ApplicationConfig(Environment env) {
         this.env = env;
     }
 
+    /**
+     * Datasource bean creation
+     * @return OMG bean
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -38,11 +46,21 @@ public class ApplicationConfig {
         return dataSource;
     }
 
+    /**
+     * Jdbc bean creation
+     * @param dataSource Dependent datasource
+     * @return JdbcTemplate bean
+     */
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
 
+    /**
+     * IOProcessor bean creation
+     * @param productService Service implementation
+     * @return IOProcessor bean
+     */
     @Bean
     public IOProcessor ioProcessor(ProductService productService) {
         return new StoreIOProcessor(productService, System.in);

@@ -21,6 +21,11 @@ public class StoreIOProcessor implements IOProcessor {
     private final ProductService productService;
     private final Scanner scanner;
 
+    /**
+     * Constructor
+     * @param productService Implemented service for products
+     * @param inputStream Interface input stream
+     */
     public StoreIOProcessor(ProductService productService, InputStream inputStream) {
         this.productService = productService;
         scanner = new Scanner(inputStream);
