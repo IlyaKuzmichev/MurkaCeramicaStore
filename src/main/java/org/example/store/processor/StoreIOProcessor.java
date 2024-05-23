@@ -1,5 +1,6 @@
 package org.example.store.processor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.example.store.model.Product;
 import org.example.store.service.ProductService;
 
@@ -14,6 +15,7 @@ import java.util.Scanner;
  * Class with input-output logic for console interface
  * @author Ilya Kuzmichev aka wilmerno
  */
+@Slf4j
 public class StoreIOProcessor implements IOProcessor {
     private static final String EXCEPTION_USER_MESSAGE = "Problem with operation, check input information and try again";
     private final ProductService productService;
@@ -29,6 +31,7 @@ public class StoreIOProcessor implements IOProcessor {
      */
     @Override
     public void run() {
+        log.info("Starting processor ...");
         boolean exitFlag = false;
         while (!exitFlag) {
             printMenu();
@@ -50,6 +53,7 @@ public class StoreIOProcessor implements IOProcessor {
                 throw new RuntimeException(e);
             }
         }
+        log.info("Finish processor, shutdown...");
     }
 
     /**
@@ -84,8 +88,10 @@ public class StoreIOProcessor implements IOProcessor {
             Product product = new Product(null, name, price, quantity);
             productService.addNewProduct(product);
             System.out.printf("Product added with id = %d\n", product.getId());
+            log.info("New entity added to database {}", product);
         } catch(Exception e) {
             System.out.println(EXCEPTION_USER_MESSAGE);
+            log.warn(e.toString());
         } finally {
             scanner.nextLine();
         }
@@ -108,15 +114,17 @@ public class StoreIOProcessor implements IOProcessor {
             product.setQuantity(scanner.nextInt());
             productService.updateProduct(product);
             System.out.println("Successfully updated");
+            log.info("New updated object {}", product);
         } catch (Exception e) {
             System.out.println(EXCEPTION_USER_MESSAGE);
+            log.warn(e.toString());
         } finally {
             scanner.nextLine();
         }
     }
 
     /**
-     * Method for finding product by it's name
+     * Method for finding product by its name
      * @since 1.0
      */
     private void processFind() {
@@ -125,8 +133,10 @@ public class StoreIOProcessor implements IOProcessor {
             Optional<Product> optProduct = productService.findProductByName(scanner.nextLine());
             optProduct.ifPresentOrElse(System.out::println,
                     () -> System.out.println("No such product in the store"));
+            log.info("Find by name method processed");
         } catch (Exception e) {
             System.out.println(EXCEPTION_USER_MESSAGE);
+            log.warn(e.getMessage());
         }
     }
 
@@ -135,7 +145,13 @@ public class StoreIOProcessor implements IOProcessor {
      * @since 1.0
      */
     private void processFindAll() {
-        prettyProductsOutput();
+        try {
+            prettyProductsOutput();
+            log.info("Find all method processed");
+        } catch (Exception e) {
+            log.warn(e.toString());
+        }
+
     }
 
     /**
@@ -151,8 +167,10 @@ public class StoreIOProcessor implements IOProcessor {
             } else {
                 System.out.println("No such product");
             }
+            log.info("Delete method processed");
         } catch (Exception e) {
             System.out.println(EXCEPTION_USER_MESSAGE);
+            log.warn(e.toString());
         } finally {
             scanner.nextLine();
         }
