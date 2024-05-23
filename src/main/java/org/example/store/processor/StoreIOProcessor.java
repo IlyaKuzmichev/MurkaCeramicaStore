@@ -10,6 +10,10 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Class with input-output logic for console interface
+ * @author Ilya Kuzmichev aka wilmerno
+ */
 public class StoreIOProcessor implements IOProcessor {
     private static final String EXCEPTION_USER_MESSAGE = "Problem with operation, check input information and try again";
     private final ProductService productService;
@@ -20,6 +24,9 @@ public class StoreIOProcessor implements IOProcessor {
         scanner = new Scanner(inputStream);
     }
 
+    /**
+     * Method for running application logic
+     */
     @Override
     public void run() {
         boolean exitFlag = false;
@@ -45,6 +52,10 @@ public class StoreIOProcessor implements IOProcessor {
         }
     }
 
+    /**
+     * Util method for printing menu
+     * @since 1.0
+     */
     private void printMenu() {
         System.out.println("Murka Ceramica store menu");
         System.out.println("--------------------------");
@@ -57,6 +68,10 @@ public class StoreIOProcessor implements IOProcessor {
         System.out.println("6. Exit");
     }
 
+    /**
+     * Method for adding product logic
+     * @since 1.0
+     */
     private void processAdd() {
 
         try {
@@ -77,6 +92,10 @@ public class StoreIOProcessor implements IOProcessor {
 
     }
 
+    /**
+     * Method for updating product logic
+     * @since 1.0
+     */
     private void processUpdate() {
         try {
             System.out.println("Choose product for updating and input id");
@@ -96,6 +115,10 @@ public class StoreIOProcessor implements IOProcessor {
         }
     }
 
+    /**
+     * Method for finding product by it's name
+     * @since 1.0
+     */
     private void processFind() {
         try {
             System.out.println("Input name of the product");
@@ -107,10 +130,18 @@ public class StoreIOProcessor implements IOProcessor {
         }
     }
 
+    /**
+     * Method for printing list of all products
+     * @since 1.0
+     */
     private void processFindAll() {
         prettyProductsOutput();
     }
 
+    /**
+     * Method for deleting the Product
+     * @since 1.0
+     */
     private void processDelete() {
         try {
             System.out.println("Choose product for deleting and input id");
@@ -128,6 +159,10 @@ public class StoreIOProcessor implements IOProcessor {
 
     }
 
+    /**
+     * Util method for pretty list of products output
+     * @since 1.0
+     */
     private void prettyProductsOutput() {
         productService.findAllProducts().stream()
                 .sorted(Comparator.comparingLong(Product::getId))

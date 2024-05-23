@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     /**
-     * Method for finding product by it's identifier
+     * Method for finding product by its identifier
      * @param name Product name
      * @return Optional of Product (not present due to product doesn't exist with presented identifier)
      * @since 1.0
