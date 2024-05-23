@@ -1,5 +1,8 @@
 package org.example.store.config;
 
+import org.example.store.processor.IOProcessor;
+import org.example.store.processor.StoreIOProcessor;
+import org.example.store.service.ProductService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -38,5 +41,10 @@ public class ApplicationConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public IOProcessor ioProcessor(ProductService productService) {
+        return new StoreIOProcessor(productService, System.in);
     }
 }

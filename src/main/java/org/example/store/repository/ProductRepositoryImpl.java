@@ -21,9 +21,21 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     /**
+     * Method for getting product by name
+     * @param name Name of the product
+     * @return Optional of Product entity, if not presented in db - Optional.empty() will be returned
+     * @since 1.0
+     */
+    @Override
+    public Optional<Product> findByName(String name) {
+        String sql = "SELECT * FROM products WHERE name = ?";
+        return jdbcTemplate.query(sql, rowMapper, name).stream().findFirst();
+    }
+
+    /**
      * Method for getting product by identifier
      * @param id Identifier of the entity in database
-     * @return Optional of Product entity with data from database
+     * @return Optional of Product entity, if not presented in db - Optional.empty() will be returned
      * @since 1.0
      */
     @Override
@@ -90,5 +102,4 @@ public class ProductRepositoryImpl implements ProductRepository {
             resultSet.getBigDecimal("price"),
             resultSet.getInt("quantity")
     );
-
 }
