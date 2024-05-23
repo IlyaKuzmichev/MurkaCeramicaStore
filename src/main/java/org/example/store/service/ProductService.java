@@ -12,7 +12,8 @@ import java.util.Optional;
 public interface ProductService {
     void addNewProduct(Product product);
     void updateProduct(Product product);
+    Optional<Product> findProductByName(String name);
     Optional<Product> findProductById(Long id);
     List<Product> findAllProducts();
-    void deleteProductById(Long id);
+    boolean deleteProductById(Long id);
 }

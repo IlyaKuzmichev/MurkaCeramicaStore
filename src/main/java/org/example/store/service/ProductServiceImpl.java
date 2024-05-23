@@ -3,6 +3,7 @@ package org.example.store.service;
 import org.example.store.model.Product;
 import org.example.store.repository.ProductRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +41,18 @@ public class ProductServiceImpl implements ProductService {
         productRepository.update(product);
     }
 
+
+    /**
+     * Method for finding product by it's identifier
+     * @param name Product name
+     * @return Optional of Product (not present due to product doesn't exist with presented identifier)
+     * @since 1.0
+     */
+    @Override
+    public Optional<Product> findProductByName(String name) {
+        return productRepository.findByName(name);
+    }
+
     /**
      * Method for finding product by it's identifier
      * @param id Product identifier
@@ -64,10 +77,16 @@ public class ProductServiceImpl implements ProductService {
     /**
      * Method for deleting product from the store
      * @param id Product identifier
+     * @return Has deletion been done
      * @since 1.0
      */
     @Override
-    public void deleteProductById(Long id) {
+    @Transactional
+    public boolean deleteProductById(Long id) {
+        if(productRepository.findById(id).isEmpty()) {
+            return false;
+        }
         productRepository.delete(id);
+        return true;
     }
 }
