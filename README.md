@@ -4,7 +4,7 @@
 ### Описание
  - Приложение реализует CRUD операции над объектом, с консольным интерфейсом
  - Абстрактное приложение склада керамического магазина
- - __Код лежит в ветке *develop*, создан pull-request в *master*__
+ - __Код лежит в ветке *develop*, создан [pull-request](https://github.com/IlyaKuzmichev/MurkaCeramicaStore/pull/1) в *master*__
 
 ### Использованные технологии
  - *Java 17*, *Spring 6*
