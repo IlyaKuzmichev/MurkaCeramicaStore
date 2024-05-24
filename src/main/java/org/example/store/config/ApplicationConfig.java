@@ -17,6 +17,7 @@ import java.util.Objects;
 /**
  * Main configuration bean of the application
  * Configures data source connection
+ * @author Ilya Kuzmichev aka wilmerno
  */
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -34,7 +35,7 @@ public class ApplicationConfig {
 
     /**
      * Datasource bean creation
-     * @return OMG bean
+     * @return Datasource bean
      */
     @Bean
     public DataSource dataSource() {

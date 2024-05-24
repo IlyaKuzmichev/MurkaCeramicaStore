@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Entrance of our knockdown application!!!!
+ * Class with main method, point of entry
  */
 public class Store {
     public static void main(String[] args) {
